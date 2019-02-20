@@ -23,7 +23,7 @@
 *                      Defines and data types
 ******************************************************************************/
 
-    unsigned int LitToBigEndian(unsigned int x);
+    un    signed int LitToBigEndian(unsigned int x);
 
 /******************************************************************************
 *                      Static variables
