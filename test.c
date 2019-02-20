@@ -1,80 +1,68 @@
 /******************************************************************************
-* File Name: Endian.c
-* Description:  This file contains the main function for determining the endian of the system
-and public function to convert little endian to big endian.
-* Tool-Chain: GCC
+* File Name: DLittle to big endian conversion
+* Description:  This file contains functions of converting the littele endian to corresponding big endian value
+* Tool-Chain: AVR gcc
 *
 *  Modification History:
-*  Created by:      Vigneshwar.D    V1.0      11/Feb/19
-*  Description:     V1.0
+*  Created by:      SHIBANI AKSHARA A    V1.0      19/Feb/2019
+*  Description:     V2.0
 ******************************************************************************/
 
 /******************************************************************************
 *                      Includes
-******************************************************************************/
+*****************************************************************************/
+
 #include <stdio.h>
+#include <stdlib.h>
+
 /******************************************************************************
 *                      Defines and data types
 ******************************************************************************/
 
 /******************************************************************************
-*                      Global variables
+*                      Defines and data types
 ******************************************************************************/
+
+    unsigned int LitToBigEndian(unsigned int x);
 
 /******************************************************************************
 *                      Static variables
 ******************************************************************************/
 
+
 /******************************************************************************
-*                      Internal function prototypes
+*                      Global functions
 ******************************************************************************/
-void endian_conversion(char *);
+
 /******************************************************************************
-*                      Public function
+* NAME: unsigned int LitToBigEndian(unsigned int x)
+* DESCRIPTIONS: This function takes the little endian number and convert it into its corresponding big endian value.
+* ARGUMENTS: unsigned int x - little endian value
+* RETURN VALUE: big endian value
 ******************************************************************************/
-/******************************************************************************
-* Name: void endian_conversion(char *c)
-* Description: This function converts little endian to big endian.
-*
-* Arguments: char *c
-******************************************************************************/
-void endian_conversion(char *c)
+unsigned int LitToBigEndian(unsigned int x)
 {
-    *c=(((*c>>24) & 0x000000ff) | ((*c>>8) & 0x0000ff00) | ((*c<<8) & 0x00ff0000) | ((*c<<24) & 0xff000000));
-    if (*c)
-    {
-        printf("Little endian");
-    }
-    else
-    {
-        printf("Big endian");
-    }
-}
-/******************************************************************************
-*                      Main function
-******************************************************************************/
-/******************************************************************************
-* Name: int main()
-* Description: This function finds whether the system is little endian or big ednian.
-*
-* Arguments: None
-******************************************************************************/
-int main()
-{
-   unsigned int i = 1;
-   char *c = (char*)&i;
-   if (*c)
-   {
-        printf("Little endian\n");
-   }
-   else
-   {
-       printf("Big endian\n");
-   }
-   endian_conversion(&c);
-   return 0;
+    return (((x>>24) & 0x000000ff) | ((x>>8) & 0x0000ff00) | ((x<<8) & 0x00ff0000) | ((x<<24) & 0xff000000));
 }
 
 /******************************************************************************
-*                      End of File
-******************************************************************************/​
+*                      Main Function
+******************************************************************************/
+
+/******************************************************************************
+* NAME: int main()
+* DESCRIPTION: This function passes the little endian value to a function and gets the corresponding ig endian value
+* ARGUMENTS: no arguments
+******************************************************************************/
+
+int main()
+{
+    int Little_Endian = 0xAABBCCDD;
+    printf("\n Little_Endian = 0x%X\n",Little_Endian);
+    printf("\n Big_Endian = 0x%X\n",LitToBigEndian(Little_Endian));
+    return 0;
+}
+
+/******************************************************************************
+*                      End of Function
+******************************************************************************/
